@@ -14,7 +14,12 @@ namespace Entity_Framework_Core01.Entites
         public decimal Salary { get; set; }
         public string Address { get; set; }
         public decimal HourRate { get; set; }
-        public int Dept_ID { get; set; }
 
+        // Relationship with Department (Many-to-One)
+        public int? Dept_ID { get; set; }
+        public Department? Department { get; set; }
+
+        // Relationship with Courses (Many-to-Many)
+        public ICollection<Course_Inst> Course_Instructors { get; set; } 
     }
 }

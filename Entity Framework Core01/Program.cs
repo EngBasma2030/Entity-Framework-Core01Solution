@@ -1,9 +1,7 @@
 ﻿using Entity_Framework_Core01.Contexts;
-using Entity_Framework_Core01.Entites;
 using Microsoft.EntityFrameworkCore;
-using Entity_Framework_Core01.Entites;
-using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
+
+
 
 namespace Entity_Framework_Core01
 {
@@ -14,38 +12,36 @@ namespace Entity_Framework_Core01
             using ITIDbContext dbContext = new ITIDbContext();
             dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
 
-            Student stud01 = new Student()
-            {
-                FName = "Basma",
-                LName = "Bahaa",
-                Address = "Giza",
-                Age = 22
-            };
-            Student stud02 = new Student()
-            {
-                FName = "Aya",
-                LName = "Bahaa",
-                Address = "Giza",
-                Age = 25
+            //Student stud01 = new Student()
+            //{
+            //    FName = "Basma",
+            //    LName = "Bahaa",
+            //    Address = "Giza",
+            //    Age = 22
+            //};
+            //Student stud02 = new Student()
+            //{
+            //    FName = "Aya",
+            //    LName = "Bahaa",
+            //    Address = "Giza",
+            //    Age = 25
+            //};
 
-            };
-
-            #region insert
+            #region Insert
             //Console.WriteLine(dbContext.Entry(stud01).State);
 
-            //dbContext.Students.Add(stud01);
+            //dbContext.Students.Add(stud01); 
             //dbContext.Set<Student>().Add(stud01);
-            //dbContext.Add(stud01);
+            //dbContext.Add(stud01); 
             //dbContext.Entry(stud01).State = EntityState.Added;
-
 
             //dbContext.Add(stud02);
             //Console.WriteLine("After Adding");
-            //Console.WriteLine(dbContext.Entry(stud01).State);
+            //Console.WriteLine(dbContext.Entry(stud01).State); 
 
             //dbContext.SaveChanges();
             //Console.WriteLine("After save Changes");
-            //Console.WriteLine(dbContext.Entry(stud01).State);
+            //Console.WriteLine(dbContext.Entry(stud01).State); 
             #endregion
 
             var student = dbContext.Students.SingleOrDefault(S => S.Id == 3);
@@ -54,12 +50,12 @@ namespace Entity_Framework_Core01
             #region Update
             //if (student != null)
             //{
-            //    student.FName = "Noha"; 
+            //    student.FName = "Noha";
             //}
 
             //if (student02 != null)
             //{
-            //    student02.FName = "Mona"; 
+            //    student02.FName = "Mona";
             //}
             //dbContext.SaveChanges();
 
@@ -67,25 +63,26 @@ namespace Entity_Framework_Core01
             //Console.WriteLine(dbContext.Entry(student02).State);
             #endregion
 
-            #region Remove
-            if (student != null)
-            {
-                //Console.WriteLine(dbContext.Entry(student).State); 
+            //if (student != null)
+            //{
+            //    Console.WriteLine(dbContext.Entry(student).State);
 
-                //dbContext.Students.Remove(student);
-                //dbContext.Set<Student>().Remove(student);
-                //dbContext.Remove(student);
-                //dbContext.Entry(student).State = EntityState.Deleted;
+            //    dbContext.Students.Remove(student);
+            //    dbContext.Set<Student>().Remove(student);
+            //    dbContext.Remove(student);
+            //    dbContext.Entry(student).State = EntityState.Deleted;
 
-                //Console.WriteLine("After delete");
-                //Console.WriteLine(dbContext.Entry(student).State); 
+            //    Console.WriteLine("After delete");
+            //    Console.WriteLine(dbContext.Entry(student).State);
 
-                //Console.WriteLine("After savechanges");
-                //dbContext.SaveChanges();
-                //Console.WriteLine(dbContext.Entry(student).State); 
-            }
-            #endregion
+            //    Console.WriteLine("After save changes");
+            //    dbContext.SaveChanges();
+            //    Console.WriteLine(dbContext.Entry(student).State);
 
+            //    Console.WriteLine(stud01);
+            //}
         }
     }
 }
+
+

@@ -12,6 +12,16 @@ namespace Entity_Framework_Core01.Entites
         public int Duration { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Top_Id { get; set; }
+
+        // Relationship with Topic (Many-to-One)
+        public int? Top_ID { get; set; }
+        public Topic? Topic { get; set; }
+
+        // Relationship with Students (Many-to-Many)
+         public ICollection<Stud_Course> Stud_Courses { get; set; } 
+
+        // Relationship with Instructors (Many-to-Many)
+        public ICollection<Course_Inst> Course_Instructors { get; set; } 
     }
 }
+
