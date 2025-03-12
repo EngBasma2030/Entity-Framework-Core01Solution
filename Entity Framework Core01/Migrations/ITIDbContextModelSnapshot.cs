@@ -46,7 +46,7 @@ namespace Entity_Framework_Core01.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Department", b =>
@@ -69,7 +69,7 @@ namespace Entity_Framework_Core01.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Instructor", b =>
@@ -102,7 +102,7 @@ namespace Entity_Framework_Core01.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instructors", (string)null);
                 });
 
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Student", b =>
@@ -132,7 +132,7 @@ namespace Entity_Framework_Core01.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Topic", b =>
@@ -149,7 +149,7 @@ namespace Entity_Framework_Core01.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Topics", (string)null);
                 });
 #pragma warning restore 612, 618
         }
