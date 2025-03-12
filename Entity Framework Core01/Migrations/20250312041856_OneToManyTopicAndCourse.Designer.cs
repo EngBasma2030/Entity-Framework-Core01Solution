@@ -4,6 +4,7 @@ using Entity_Framework_Core01.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entity_Framework_Core01.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250312041856_OneToManyTopicAndCourse")]
+    partial class OneToManyTopicAndCourse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,10 +92,6 @@ namespace Entity_Framework_Core01.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Ins_ID")
-                        .IsUnique()
-                        .HasFilter("[Ins_ID] IS NOT NULL");
 
                     b.ToTable("Departments");
                 });
@@ -229,16 +228,6 @@ namespace Entity_Framework_Core01.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Instructor");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Department", b =>
-                {
-                    b.HasOne("Entity_Framework_Core01.Entites.Instructor", "Head")
-                        .WithOne()
-                        .HasForeignKey("Entity_Framework_Core01.Entites.Department", "Ins_ID")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Head");
                 });
 
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Instructor", b =>

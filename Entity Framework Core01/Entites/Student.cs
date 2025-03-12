@@ -13,21 +13,28 @@ namespace Entity_Framework_Core01.Entites
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-        // [AllowNull]
-        [Column(TypeName = "varchar")]
-        [MaxLength(50)]
-        [StringLength(50, MinimumLength = 10)]
+        //[Required]
+        //[Column(TypeName = "varchar")]
+        //[MaxLength(50)]
+        //[StringLength(50, MinimumLength = 10)]
         public string FName { get; set; }
-        [Required]
-        // [AllowNull]
-        [Column(TypeName = "varchar")]
-        [MaxLength(50)]
-        [StringLength(50, MinimumLength = 10)]
+        //[Required]
+        //[Column(TypeName = "varchar")]
+        //[MaxLength(50)]
+        //[StringLength(50, MinimumLength = 10)]
         public string LName { get; set; }
         public string Address { get; set; }
-        [Range(21,60)]
+
+        [Range(21, 60)]
         public int Age { get; set; }
-        public int Dep_Id { get; set; }
+
+        // Relationship with Department (Many-to-One)
+        public int? Dept_Id { get; set; }
+        public Department? Department { get; set; }
+
+        // Relationship with Courses (Many-to-Many)
+         public ICollection<Stud_Course> Stud_Courses { get; set; } 
+
+
     }
 }

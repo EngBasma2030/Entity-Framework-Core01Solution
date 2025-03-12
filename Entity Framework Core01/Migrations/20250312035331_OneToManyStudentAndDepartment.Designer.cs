@@ -4,6 +4,7 @@ using Entity_Framework_Core01.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entity_Framework_Core01.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250312035331_OneToManyStudentAndDepartment")]
+    partial class OneToManyStudentAndDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,28 +49,7 @@ namespace Entity_Framework_Core01.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Top_ID");
-
                     b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Course_Inst", b =>
-                {
-                    b.Property<int>("inst_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Course_ID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("evaluate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("inst_ID", "Course_ID");
-
-                    b.HasIndex("Course_ID");
-
-                    b.ToTable("Course_Insts");
                 });
 
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Department", b =>
@@ -89,10 +71,6 @@ namespace Entity_Framework_Core01.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Ins_ID")
-                        .IsUnique()
-                        .HasFilter("[Ins_ID] IS NOT NULL");
 
                     b.ToTable("Departments");
                 });
@@ -127,27 +105,7 @@ namespace Entity_Framework_Core01.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Dept_ID");
-
                     b.ToTable("Instructors");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Stud_Course", b =>
-                {
-                    b.Property<int>("stud_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Course_ID")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Grade")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("stud_ID", "Course_ID");
-
-                    b.HasIndex("Course_ID");
-
-                    b.ToTable("Stud_Courses");
                 });
 
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Student", b =>
@@ -202,74 +160,6 @@ namespace Entity_Framework_Core01.Migrations
                     b.ToTable("Topics");
                 });
 
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Course", b =>
-                {
-                    b.HasOne("Entity_Framework_Core01.Entites.Topic", "Topic")
-                        .WithMany("Courses")
-                        .HasForeignKey("Top_ID")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Topic");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Course_Inst", b =>
-                {
-                    b.HasOne("Entity_Framework_Core01.Entites.Course", "Course")
-                        .WithMany("Course_Instructors")
-                        .HasForeignKey("Course_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity_Framework_Core01.Entites.Instructor", "Instructor")
-                        .WithMany("Course_Instructors")
-                        .HasForeignKey("inst_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Instructor");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Department", b =>
-                {
-                    b.HasOne("Entity_Framework_Core01.Entites.Instructor", "Head")
-                        .WithOne()
-                        .HasForeignKey("Entity_Framework_Core01.Entites.Department", "Ins_ID")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Head");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Instructor", b =>
-                {
-                    b.HasOne("Entity_Framework_Core01.Entites.Department", "Department")
-                        .WithMany("Instructors")
-                        .HasForeignKey("Dept_ID")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Stud_Course", b =>
-                {
-                    b.HasOne("Entity_Framework_Core01.Entites.Course", "Course")
-                        .WithMany("Stud_Courses")
-                        .HasForeignKey("Course_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity_Framework_Core01.Entites.Student", "Student")
-                        .WithMany("Stud_Courses")
-                        .HasForeignKey("stud_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Student", b =>
                 {
                     b.HasOne("Entity_Framework_Core01.Entites.Department", "Department")
@@ -280,33 +170,9 @@ namespace Entity_Framework_Core01.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Course", b =>
-                {
-                    b.Navigation("Course_Instructors");
-
-                    b.Navigation("Stud_Courses");
-                });
-
             modelBuilder.Entity("Entity_Framework_Core01.Entites.Department", b =>
                 {
-                    b.Navigation("Instructors");
-
                     b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Instructor", b =>
-                {
-                    b.Navigation("Course_Instructors");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Student", b =>
-                {
-                    b.Navigation("Stud_Courses");
-                });
-
-            modelBuilder.Entity("Entity_Framework_Core01.Entites.Topic", b =>
-                {
-                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }
